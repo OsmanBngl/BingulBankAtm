@@ -3,7 +3,18 @@ package com.bingulbankatm.musteri;
 public class Musteri  {
 
    private String tcKimlikNo;
-   private String adSoyad;
+
+    public Musteri(String tcKimlikNo, String adSoyad, int hesapBakiyesi, String musteriNo) {
+        this.tcKimlikNo = tcKimlikNo;
+        this.adSoyad = adSoyad;
+        this.hesapBakiyesi = hesapBakiyesi;
+        this.musteriNo = musteriNo;
+    }
+    public Musteri(){
+
+    }
+
+    private String adSoyad;
    private int hesapBakiyesi;
    private String musteriNo;
 

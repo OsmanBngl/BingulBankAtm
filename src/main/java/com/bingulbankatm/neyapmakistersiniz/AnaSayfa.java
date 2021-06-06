@@ -10,72 +10,32 @@ import java.util.*;
 
 public class AnaSayfa {
     public static void main(String[] args) {
-        Scanner scanner =new Scanner(System.in);
-        KurumsalMusteri kurumsalMusteri =new KurumsalMusteri();
-        BireyselMusteri bireyselMusteri=new BireyselMusteri();
-        Musteri musterim=new Musteri();
-        AtmIslemleri islemler=new AtmIslemleri(kurumsalMusteri);
+        Scanner scanner = new Scanner(System.in);
+
+        MusteriDao.musteriEkle(new KurumsalMusteri("Testinium","2030292873","OSMAN",100,"12"));
+        MusteriDao.musteriEkle(new KurumsalMusteri("microsoft","232132131","bill",200,"13"));
+        MusteriDao.musteriEkle(new KurumsalMusteri("google","34234324","ELON",100,"14"));
+        MusteriDao.musteriEkle(new BireyselMusteri("kadıköy","123456789","Merve",300,"15"));
+        MusteriDao.musteriEkle(new BireyselMusteri("üsküdar","256789054","Şeyma Subaşı",400,"16"));
+
+        System.out.println("Lütfen Müşteri Numarınızı Giriniz :");
+        String m = scanner.nextLine();
+
+        Musteri msn = MusteriDao.getMusteri(m);
+        AtmIslemleri islemler = new AtmIslemleri(msn);
+        getMusteriDescription(msn);
 
 
 
-        kurumsalMusteri.setMusteriNo("12");
-        kurumsalMusteri.setHesapBakiyesi(300);
-        kurumsalMusteri.setTcKimlikNo("23213213213");
-        kurumsalMusteri.setAdSoyad("Osman");
-        kurumsalMusteri.setSirketAdi("apple");
+        System.out.println("Lütfen yapıcağınız işlemi seçiniz : " + " " + "Para Çek: 1" + " " + "Para Yatır: 2");
+        int islem = scanner.nextInt();
 
-        kurumsalMusteri.setMusteriNo("13");
-        kurumsalMusteri.setHesapBakiyesi(200);
-        kurumsalMusteri.setTcKimlikNo("232133432413");
-        kurumsalMusteri.setAdSoyad("EMRE");
-        kurumsalMusteri.setSirketAdi("google");
-
-        bireyselMusteri.setMusteriNo("14");
-        bireyselMusteri.setHesapBakiyesi(250);
-        bireyselMusteri.setTcKimlikNo("123213213");
-        bireyselMusteri.setEvAdresi("Kadıköy");
-        bireyselMusteri.setAdSoyad("Ayşe");
-
-        bireyselMusteri.setMusteriNo("15");
-        bireyselMusteri.setHesapBakiyesi(150);
-        bireyselMusteri.setTcKimlikNo("127213213");
-        bireyselMusteri.setEvAdresi("Üsküdar");
-        bireyselMusteri.setAdSoyad("Merve");
-
-
-        kurumsalMusteri.setMusteriNo("16");
-        kurumsalMusteri.setHesapBakiyesi(100);
-        kurumsalMusteri.setTcKimlikNo("213454213");
-        kurumsalMusteri.setAdSoyad("Bill Gates");
-        kurumsalMusteri.setSirketAdi("Microsoft");
-
-
-
-
-        MusteriDao.musteriEkle(kurumsalMusteri);
-
-        MusteriDao.musteriEkle(bireyselMusteri);
-
-
-
-
-        System.out.println("Lütfen Müşteri Numarınızı Giriniz :" );
-        String m =scanner.nextLine();
-
-
-        System.out.println(kurumsalMusteri.getAdSoyad() + " " + kurumsalMusteri.getTcKimlikNo() + " " +  kurumsalMusteri.getSirketAdi() + " " +  kurumsalMusteri.getHesapBakiyesi());
-        System.out.println(bireyselMusteri.getAdSoyad() + " " +  bireyselMusteri.getTcKimlikNo() + " " +  bireyselMusteri.getEvAdresi() + " " +  bireyselMusteri.getTcKimlikNo() + " " +  bireyselMusteri.getHesapBakiyesi());
-
-        System.out.println("Lütfen yapıcağınız işlemi seçiniz : " + " " +"Para Çek: 1"  + " " + "Para Yatır: 2");
-        int islem= scanner.nextInt();
-
-        switch (islem)
-        {
+        switch (islem) {
             case 1:
                 System.out.println("Çekmek istediğiniz Tutarı Giriniz");
                 islemler.paraCek(scanner.nextInt());
 
-              break;
+                break;
             case 2:
                 System.out.println("Yatırmak İstediğiniz Tutarı Giriniz");
                 islemler.paraYatir(scanner.nextInt());
@@ -83,10 +43,20 @@ public class AnaSayfa {
         }
 
 
-
-          }
-
-
-
     }
+        private static void getMusteriDescription(BireyselMusteri bireyselMusteri) {
+            System.out.println(bireyselMusteri.getAdSoyad() + " " + bireyselMusteri.getTcKimlikNo() + " " + bireyselMusteri.getEvAdresi() + " " + bireyselMusteri.getTcKimlikNo() + " " + bireyselMusteri.getHesapBakiyesi());
+        }
+
+        private static void getMusteriDescription(KurumsalMusteri kurumsalMusteri) {
+        System.out.println(kurumsalMusteri.getAdSoyad() + " " + kurumsalMusteri.getTcKimlikNo() + " " + kurumsalMusteri.getSirketAdi() + " " + kurumsalMusteri.getHesapBakiyesi());
+        }
+
+        private static void getMusteriDescription(Musteri musteri){
+            System.out.println(musteri.getAdSoyad() + " " + musteri.getTcKimlikNo()  + " " + musteri.getHesapBakiyesi());
+        }
+
+
+
+}
 
